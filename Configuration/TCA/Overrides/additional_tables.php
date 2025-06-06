@@ -12,7 +12,7 @@ foreach (TranslationHelper::additionalTables() as $table) {
         'autotranslate_exclude' => [
             'exclude' => 1,
             'label' => $llPath . 'autotranslate_exclude',
-            'displayCond' => 'FIELD:' . $GLOBALS['TCA']['tt_content']['ctrl']['transOrigPointerField'] . ':<=:0',
+            'displayCond' => 'FIELD:' . $GLOBALS['TCA'][$table]['ctrl']['transOrigPointerField'] . ':<=:0',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
