@@ -145,10 +145,14 @@ if (empty($apiKey)) {
     $deeplSourceLangItems[] = ['Please define deepl api key first', ''];
 } else {
     $deeplSourceLangItems[] = ['Please Choose'];
-    $translator = new \DeepL\Translator($apiKey);
-    $sourceLanguages = $translator->getSourceLanguages();
-    foreach ($sourceLanguages as $sourceLanguage) {
-        $deeplSourceLangItems[] = [$sourceLanguage->name, $sourceLanguage->code];
+    try {
+        $translator = new \DeepL\Translator($apiKey);
+        $sourceLanguages = $translator->getSourceLanguages();
+        foreach ($sourceLanguages as $sourceLanguage) {
+            $deeplSourceLangItems[] = [$sourceLanguage->name, $sourceLanguage->code];
+        }
+    } catch (\Throwable $exception) {
+        $deeplSourceLangItems[] = ['DeepL API error: ' . $exception->getMessage(), ''];
     }
 }
 
@@ -173,10 +177,14 @@ if (empty($apiKey)) {
     $deeplTargetLangItems[] = ['Please define deepl api key first', ''];
 } else {
     $deeplTargetLangItems[] = ['Please Choose'];
-    $translator = new \DeepL\Translator($apiKey);
-    $targetLanguages = $translator->getTargetLanguages();
-    foreach ($targetLanguages as $targetLanguage) {
-        $deeplTargetLangItems[] = [$targetLanguage->name, $targetLanguage->code];
+    try {
+        $translator = new \DeepL\Translator($apiKey);
+        $targetLanguages = $translator->getTargetLanguages();
+        foreach ($targetLanguages as $targetLanguage) {
+            $deeplTargetLangItems[] = [$targetLanguage->name, $targetLanguage->code];
+        }
+    } catch (\Throwable $exception) {
+        $deeplTargetLangItems[] = ['DeepL API error: ' . $exception->getMessage(), ''];
     }
 }
 
